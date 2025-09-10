@@ -11,5 +11,7 @@ module.exports = defineConfig({
         }
       });
     },
+    // A linha abaixo foi adicionada para gerar o video dos testes
+    video: true,
   },
 });
