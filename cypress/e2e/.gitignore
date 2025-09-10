@@ -1,0 +1,6 @@
+# Pastas de dependências
+node_modules/
+
+# Arquivos de teste do Cypress
+cypress/videos/
+cypress/screenshots/
