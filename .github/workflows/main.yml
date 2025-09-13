@@ -1,0 +1,35 @@
+# Nome do seu fluxo de trabalho, que aparecerá no GitHub
+name: Run Postman Newman Tests
+
+# Quando este fluxo de trabalho deve ser executado
+on:
+  push:
+    branches: [ main ] # Executar sempre que houver um push para a branch 'main'
+  pull_request:
+    branches: [ main ] # Executar também em pull requests
+
+# Os 'jobs' são as tarefas que serão executadas
+jobs:
+  run-newman-tests:
+    # O ambiente onde o teste será executado
+    runs-on: ubuntu-latest
+
+    # Os passos que serão executados sequencialmente
+    steps:
+    - name: Checkout Code
+      # Este passo baixa seu repositório para o ambiente de execução
+      uses: actions/checkout@v2
+
+    - name: Install Node.js
+      # Instala o Node.js, que é necessário para o Newman
+      uses: actions/setup-node@v2
+      with:
+        node-version: '16'
+
+    - name: Install Newman
+      # Instala o Newman e o reporter HTML
+      run: npm install -g newman newman-reporter-htmlextra
+
+    - name: Run Postman tests
+      # Este é o comando que executa sua coleção
+      run: newman run "Projeto de Automação - API de Produtos.postman_collection.json" -e "Producao.postman_environment.json" -n 1
